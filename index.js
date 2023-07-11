@@ -39,7 +39,7 @@ function addNewTask(e) {
   main();
 }
 
-function checkTaskList() {
+function checkTaskCount() {
   if (taskList.length === 0) {
     para.textContent = "You have no task."
     taskListContainer.appendChild(para);
@@ -53,7 +53,7 @@ function checkTaskList() {
 }
 
 function main() {
-  checkTaskList();
+  checkTaskCount();
   newTaskInput.addEventListener("click", removeDefaultValue);
   newTaskInput.addEventListener("keyup", enableButton);
   newTaskInput.addEventListener("focusout", returnDefaultValue);
