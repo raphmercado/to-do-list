@@ -28,14 +28,17 @@ function addNewTask(e) {
   const newLine = document.createElement("br");
   const taskCheckbox = document.createElement("input");
   const newTask = document.createElement("para");
+  const deleteTaskButton = document.createElement("button");
   const taskContainer = document.createElement("div");
+  deleteTaskButton.className = "deleteTaskButton";
   taskContainer.className = "taskContainer";
   taskCheckbox.setAttribute("type", "checkbox");
   newTask.setAttribute("for", "taskCheckbox");
   newTask.textContent = newTaskInput.value;
-  taskListContainer.appendChild(newLine);
+  deleteTaskButton.textContent = "Delete";
   taskContainer.appendChild(taskCheckbox);
   taskContainer.appendChild(newTask);
+  taskContainer.appendChild(deleteTaskButton);
   taskListContainer.appendChild(taskContainer);
   taskList.push(newTaskInput.value);
   console.log(taskList);
