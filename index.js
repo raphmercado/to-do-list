@@ -1,8 +1,8 @@
-const taskList = document.querySelector(".taskList");
+const taskListContainer = document.querySelector(".taskListContainer");
 const newTaskInput = document.querySelector("#newTaskInput");
 const addNewTaskBtn = document.querySelector("#addNewTaskBtn");
 const para = document.createElement("para");
-const toDoList = [];
+const taskList = [];
 
 function removeDefaultValue(e) {
   console.log("Removing default value...");
@@ -31,18 +31,18 @@ function addNewTask(e) {
   taskCheckbox.setAttribute("type", "checkbox");
   newTask.setAttribute("for", "taskCheckbox");
   newTask.textContent = newTaskInput.value;
-  taskList.appendChild(newLine);
-  taskList.appendChild(taskCheckbox);
-  taskList.appendChild(newTask);
-  toDoList.push(newTaskInput.value);
-  console.log(toDoList);
+  taskListContainer.appendChild(newLine);
+  taskListContainer.appendChild(taskCheckbox);
+  taskListContainer.appendChild(newTask);
+  taskList.push(newTaskInput.value);
+  console.log(taskList);
   main();
 }
 
 function checkTaskList() {
-  if (taskList.childNodes.length === 0) {
+  if (taskListContainer.childNodes.length === 0) {
     para.textContent = "You have no task."
-    taskList.appendChild(para);
+    taskListContainer.appendChild(para);
   } else {
     para.textContent = `You have task/s.`;
   }
