@@ -2,6 +2,7 @@ const taskList = document.querySelector(".taskList");
 const newTaskInput = document.querySelector("#newTaskInput");
 const addNewTaskBtn = document.querySelector("#addNewTaskBtn");
 const para = document.createElement("para");
+const toDoList = [];
 
 function removeDefaultValue(e) {
   console.log("Removing default value...");
@@ -33,6 +34,8 @@ function addNewTask(e) {
   taskList.appendChild(newLine);
   taskList.appendChild(taskCheckbox);
   taskList.appendChild(newTask);
+  toDoList.push(newTaskInput.value);
+  console.log(toDoList);
   main();
 }
 
