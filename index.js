@@ -1,7 +1,7 @@
 const taskListContainer = document.querySelector(".taskListContainer");
 const newTaskInput = document.querySelector("#newTaskInput");
 const addNewTaskBtn = document.querySelector("#addNewTaskBtn");
-const para = document.createElement("para");
+const taskCount = document.createElement("para");
 const taskList = [];
 
 function removeDefaultValue(e) {
@@ -41,13 +41,13 @@ function addNewTask(e) {
 
 function checkTaskCount() {
   if (taskList.length === 0) {
-    para.textContent = "You have no task."
-    taskListContainer.appendChild(para);
+    taskCount.textContent = "You have no task."
+    taskListContainer.appendChild(taskCount);
   } else {
     if (taskList.length === 1) {
-      para.textContent = `You have ${taskList.length} task.`;
+      taskCount.textContent = `You have ${taskList.length} task.`;
     } else {
-      para.textContent = `You have ${taskList.length} task/s.`;
+      taskCount.textContent = `You have ${taskList.length} task/s.`;
     }
   }
 }
