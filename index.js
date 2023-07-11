@@ -40,11 +40,15 @@ function addNewTask(e) {
 }
 
 function checkTaskList() {
-  if (taskListContainer.childNodes.length === 0) {
+  if (taskList.length === 0) {
     para.textContent = "You have no task."
     taskListContainer.appendChild(para);
   } else {
-    para.textContent = `You have task/s.`;
+    if (taskList.length === 1) {
+      para.textContent = `You have ${taskList.length} task.`;
+    } else {
+      para.textContent = `You have ${taskList.length} task/s.`;
+    }
   }
 }
 
