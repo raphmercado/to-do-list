@@ -2,6 +2,7 @@ const taskListContainer = document.querySelector(".taskListContainer");
 const newTaskInput = document.querySelector("#newTaskInput");
 const addNewTaskBtn = document.querySelector("#addNewTaskBtn");
 const taskCount = document.createElement("para");
+let taskCounter = 0;
 const taskList = [];
 
 function removeDefaultValue(e) {
@@ -24,6 +25,7 @@ function disableButton() {
 }
 
 function addNewTask(e) {
+  taskCounter++;
   console.log("Adding new task...");
   const newLine = document.createElement("br");
   const taskCheckbox = document.createElement("input");
@@ -32,6 +34,7 @@ function addNewTask(e) {
   const taskContainer = document.createElement("div");
   deleteTaskButton.className = "deleteTaskButton";
   taskContainer.className = "taskContainer";
+  taskContainer.setAttribute("id", `task${taskCounter}`);
   taskCheckbox.setAttribute("type", "checkbox");
   newTask.setAttribute("for", "taskCheckbox");
   newTask.textContent = newTaskInput.value;
@@ -42,18 +45,19 @@ function addNewTask(e) {
   taskListContainer.appendChild(taskContainer);
   taskList.push(newTaskInput.value);
   console.log(taskList);
+  console.log(taskCounter);
   main();
 }
 
 function checkTaskCount() {
-  if (taskList.length === 0) {
+  if (taskCounter === 0) {
     taskCount.textContent = "You have no task."
     taskListContainer.appendChild(taskCount);
   } else {
-    if (taskList.length === 1) {
-      taskCount.textContent = `You have ${taskList.length} task.`;
+    if (taskCounter === 1) {
+      taskCount.textContent = `You have ${taskCounter} task.`;
     } else {
-      taskCount.textContent = `You have ${taskList.length} task/s.`;
+      taskCount.textContent = `You have ${taskCounter} task/s.`;
     }
   }
 }
