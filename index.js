@@ -16,22 +16,6 @@ function disableButton() {
 function addNewTask(e) {
   taskCounter++;
   console.log("Adding new task...");
-  const newLine = document.createElement("br");
-  const taskCheckbox = document.createElement("input");
-  const newTask = document.createElement("para");
-  const deleteTaskButton = document.createElement("button");
-  const taskContainer = document.createElement("div");
-  deleteTaskButton.className = "deleteTaskButton";
-  taskContainer.className = "taskContainer";
-  taskContainer.setAttribute("id", `task${taskCounter}`);
-  taskCheckbox.setAttribute("type", "checkbox");
-  newTask.setAttribute("for", "taskCheckbox");
-  newTask.textContent = newTaskInput.value;
-  deleteTaskButton.textContent = "Delete";
-  taskContainer.appendChild(taskCheckbox);
-  taskContainer.appendChild(newTask);
-  taskContainer.appendChild(deleteTaskButton);
-  taskListContainer.appendChild(taskContainer);
   taskList.push(newTaskInput.value);
   console.log(taskList);
   console.log(taskCounter);
