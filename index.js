@@ -5,17 +5,6 @@ const taskCount = document.createElement("para");
 let taskCounter = 0;
 const taskList = [];
 
-function removeDefaultValue(e) {
-  console.log("Removing default value...");
-  newTaskInput.setAttribute("value", "");
-}
-
-function returnDefaultValue(e) {
-  console.log("Returning default value...");
-  newTaskInput.setAttribute("value", "Add a new task");
-
-}
-
 function enableButton(e) {
   addNewTaskBtn.removeAttribute("disabled");
 }
@@ -64,9 +53,7 @@ function checkTaskCount() {
 
 function main() {
   checkTaskCount();
-  newTaskInput.addEventListener("click", removeDefaultValue);
   newTaskInput.addEventListener("keyup", enableButton);
-  newTaskInput.addEventListener("focusout", returnDefaultValue);
   addNewTaskBtn.addEventListener("click", addNewTask);
 }
 
