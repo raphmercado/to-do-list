@@ -5,7 +5,7 @@ const taskCount = document.createElement("para");
 let taskCounter = 0;
 const taskList = [];
 
-function enableDisableButton(e) {
+function enableDisableButton() {
   if (newTaskInput.value != "") {
     addNewTaskBtn.removeAttribute("disabled");
   }
@@ -14,18 +14,17 @@ function enableDisableButton(e) {
   }
 }
 
-function addNewTask(e) {
+function addNewTask() {
   taskCounter++;
   console.log("Adding new task...");
   const task = document.createElement("li");
   task.textContent = newTaskInput.value;
   taskListContainer.appendChild(task);
   taskList.push(newTaskInput.value);
-  console.log(taskList);
-  console.log(taskCounter);
   addNewTaskBtn.setAttribute("disabled", "");
   newTaskInput.value = "";
-  main();
+  console.log(taskList);
+  console.log(taskCounter);
 }
 
 function checkTaskCount() {
