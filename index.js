@@ -5,12 +5,13 @@ const taskCount = document.createElement("para");
 let taskCounter = 0;
 const taskList = [];
 
-function enableButton(e) {
-  addNewTaskBtn.removeAttribute("disabled");
-}
-
-function disableButton() {
-  addNewTaskBtn.setAttribute("disabled", "");
+function enableDisableButton(e) {
+  if (newTaskInput.value != "") {
+    addNewTaskBtn.removeAttribute("disabled");
+  }
+  else if (newTaskInput.value === "") {
+    addNewTaskBtn.setAttribute("disabled", "");
+  }
 }
 
 function addNewTask(e) {
@@ -40,7 +41,7 @@ function checkTaskCount() {
 
 function main() {
   checkTaskCount();
-  newTaskInput.addEventListener("keyup", enableButton);
+  newTaskInput.addEventListener("keyup", enableDisableButton);
   addNewTaskBtn.addEventListener("click", addNewTask);
 }
 
