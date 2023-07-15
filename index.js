@@ -23,6 +23,8 @@ function addNewTask(e) {
   taskList.push(newTaskInput.value);
   console.log(taskList);
   console.log(taskCounter);
+  addNewTaskBtn.setAttribute("disabled", "");
+  newTaskInput.value = "";
   main();
 }
 
