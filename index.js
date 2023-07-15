@@ -25,6 +25,11 @@ function addNewTask() {
   newTaskInput.value = "";
   console.log(taskList);
   console.log(taskCounter);
+  task.addEventListener("click", toggleChecked);
+}
+
+function toggleChecked(e) {
+  e.target.classList.toggle("checked");
 }
 
 function checkTaskCount() {
