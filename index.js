@@ -16,6 +16,9 @@ function disableButton() {
 function addNewTask(e) {
   taskCounter++;
   console.log("Adding new task...");
+  const task = document.createElement("li");
+  task.textContent = newTaskInput.value;
+  taskListContainer.appendChild(task);
   taskList.push(newTaskInput.value);
   console.log(taskList);
   console.log(taskCounter);
