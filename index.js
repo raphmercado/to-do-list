@@ -1,4 +1,4 @@
-const taskListContainer = document.getElementById("taskListContainer");
+ const taskListContainer = document.getElementById("taskListContainer");
 const newTaskInput = document.getElementById("newTaskInput");
 const addNewTaskBtn = document.getElementById("addNewTaskBtn");
 const taskCount = document.createElement("para");
@@ -26,6 +26,7 @@ function addNewTask() {
   console.log(taskList);
   console.log(taskCounter);
   task.addEventListener("click", toggleChecked);
+  main();
 }
 
 function toggleChecked(e) {
@@ -36,14 +37,13 @@ function checkTaskCount() {
   if (taskCounter === 0) {
     taskCount.textContent = "You have no task."
     taskListContainer.appendChild(taskCount);
-  } else {
-    if (taskCounter === 1) {
-      taskCount.textContent = `You have ${taskCounter} task.`;
-    } else {
-      taskCount.textContent = `You have ${taskCounter} task/s.`;
-    }
+  } else if (taskCounter === 1) {
+    taskCount.textContent = `You have ${taskCounter} task.`;
+  } else if (taskCounter > 1) {
+    taskCount.textContent = `You have ${taskCounter} task/s.`;
   }
-}
+  
+  }        
 
 function main() {
   checkTaskCount();
