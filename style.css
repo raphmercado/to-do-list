@@ -11,7 +11,7 @@ ul li {
   cursor: pointer;
 }
 
-ul li::before {
+span::before {
   content: '';
   position: absolute;
   border-radius: 50%;
@@ -25,10 +25,24 @@ ul li::before {
   left: -30px;
 }
 
-ul li.checked {
+span.checked {
   text-decoration: line-through;
 }
 
-ul li.checked::before {
+span.checked::before {
   background-image: url(images/checked.png);
+}
+
+span:hover {
+  background-color: yellow;
+}
+
+a {
+  background-color: green;
+  color: white;
+  margin-left: 10px;
+}
+
+a:hover {
+  background-color: blue;
 }
