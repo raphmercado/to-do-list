@@ -19,12 +19,16 @@ function addNewTask() {
   const task = document.createElement("li");
   const span = document.createElement("span");
   const edit = document.createElement("a");
+  const del = document.createElement("a");
   span.setAttribute("id", "checkbox");
   edit.className = "edit";
+  del.className = "delete";
   span.textContent = newTaskInput.value;
   edit.textContent = "Edit";
+  del.textContent = "Delete";
   task.appendChild(span);
   task.appendChild(edit);
+  task.appendChild(del);
   taskListContainer.appendChild(task);
   addNewTaskBtn.setAttribute("disabled", "");
   newTaskInput.value = "";
@@ -32,11 +36,26 @@ function addNewTask() {
   localStorage.setItem("tasks", JSON.stringify(taskList));
   task.addEventListener("click", toggleChecked);
   edit.addEventListener("click", editTask);
+  del.addEventListener("click", deleteTask);
   main();
 }
 
 function editTask(e) {
   console.log("Editing task...");
+}
+
+function deleteTask(e) {
+  console.log("Deleting task...");
+  console.log(e.target.parentElement.firstChild.textContent);
+  for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
+    if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
+      taskList.pop(i);
+      console.log("Task Deleted.");
+    }
+  }
+  localStorage.setItem("tasks", JSON.stringify(taskList))
+  console.log(taskList);
+  location.reload();
 }
 
 function toggleChecked(e) {
@@ -69,15 +88,20 @@ function displayTaskList() {
         const task = document.createElement("li");
         const span = document.createElement("span");
         const edit = document.createElement("a");
+        const del = document.createElement("a");
         span.setAttribute("id", "checkbox");
         edit.className = "edit";
+        del.className = "delete";
         span.textContent = JSON.parse(localStorage.getItem("tasks"))[i];
         edit.textContent = "Edit";
+        del.textContent = "Delete";
         task.appendChild(span);
         task.appendChild(edit);
+        task.appendChild(del);
         taskListContainer.appendChild(task);
         task.addEventListener("click", toggleChecked);
         edit.addEventListener("click", editTask);
+        del.addEventListener("click", deleteTask);
       }
       console.log(taskList);
     }
