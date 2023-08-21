@@ -43,12 +43,17 @@ function addNewTask() {
 function editTask(e) {
   console.log("Editing task...");
   console.log(e.target.parentElement.firstChild.textContent);
-  const editedTask = prompt("Edit task");
-  const oldTask = taskList.indexOf(e.target.parentElement.firstChild.textContent);
-  taskList.splice(oldTask, 1, editedTask);
-  localStorage.setItem("tasks", JSON.stringify(taskList));
-  console.log(taskList);
-  location.reload();
+  const input = prompt("Edit task");
+  if (input === null) {
+    return;
+  }
+  else {
+    const oldTask = taskList.indexOf(e.target.parentElement.firstChild.textContent);
+    taskList.splice(oldTask, 1, input);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    console.log(taskList);
+    location.reload();
+  }
 }
 
 function deleteTask(e) {
