@@ -49,7 +49,7 @@ function deleteTask(e) {
   console.log(e.target.parentElement.firstChild.textContent);
   for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
     if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
-      taskList.pop(i);
+      taskList.splice(i, 1);
       console.log("Task Deleted.");
     }
   }
