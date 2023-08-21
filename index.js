@@ -1,4 +1,4 @@
- const taskListContainer = document.getElementById("taskListContainer");
+const taskListContainer = document.getElementById("taskListContainer");
 const newTaskInput = document.getElementById("newTaskInput");
 const addNewTaskBtn = document.getElementById("addNewTaskBtn");
 const taskCount = document.createElement("para");
@@ -15,20 +15,37 @@ function enableDisableButton() {
 
 function addNewTask() {
   console.log("Adding new task...");
-  const task = document.createElement("li");
-  task.textContent = newTaskInput.value;
-  taskListContainer.appendChild(task);
   taskList.push(newTaskInput.value);
+  const task = document.createElement("li");
+  const span = document.createElement("span");
+  const edit = document.createElement("a");
+  span.setAttribute("id", "checkbox");
+  edit.className = "edit";
+  span.textContent = newTaskInput.value;
+  edit.textContent = "Edit";
+  task.appendChild(span);
+  task.appendChild(edit);
+  taskListContainer.appendChild(task);
   addNewTaskBtn.setAttribute("disabled", "");
   newTaskInput.value = "";
   console.log(taskList.length);
   localStorage.setItem("tasks", JSON.stringify(taskList));
   task.addEventListener("click", toggleChecked);
+  edit.addEventListener("click", editTask);
   main();
 }
 
+function editTask(e) {
+  console.log("Editing task...");
+}
+
 function toggleChecked(e) {
-  e.target.classList.toggle("checked");
+  if (e.target.id !== "checkbox") {
+    return;
+  } 
+  else {
+    e.target.classList.toggle("checked");
+  }
 }
 
 function displayTaskCount() {
@@ -50,8 +67,17 @@ function displayTaskList() {
       for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
         taskList.push(JSON.parse(localStorage.getItem("tasks"))[i]);
         const task = document.createElement("li");
-        task.textContent = JSON.parse(localStorage.getItem("tasks"))[i];
+        const span = document.createElement("span");
+        const edit = document.createElement("a");
+        span.setAttribute("id", "checkbox");
+        edit.className = "edit";
+        span.textContent = JSON.parse(localStorage.getItem("tasks"))[i];
+        edit.textContent = "Edit";
+        task.appendChild(span);
+        task.appendChild(edit);
         taskListContainer.appendChild(task);
+        task.addEventListener("click", toggleChecked);
+        edit.addEventListener("click", editTask);
       }
       console.log(taskList);
     }
