@@ -42,20 +42,34 @@ function addNewTask() {
 
 function editTask(e) {
   console.log("Editing task...");
+  console.log(e.target.parentElement.firstChild.textContent);
+  const editedTask = prompt("Edit task");
+  const oldTask = taskList.indexOf(e.target.parentElement.firstChild.textContent);
+  taskList.splice(oldTask, 1, editedTask);
+  localStorage.setItem("tasks", JSON.stringify(taskList));
+  console.log(taskList);
+  location.reload();
 }
 
 function deleteTask(e) {
-  console.log("Deleting task...");
-  console.log(e.target.parentElement.firstChild.textContent);
-  for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
-    if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
-      taskList.splice(i, 1);
-      console.log("Task Deleted.");
+  const response = confirm("Are you sure you want to delete this task?");
+  if (response === true) {
+    console.log("Deleting task...");
+    console.log(e.target.parentElement.firstChild.textContent);
+    for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
+      if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
+        taskList.splice(i, 1);
+        console.log("Task Deleted.");
+      }
     }
+    localStorage.setItem("tasks", JSON.stringify(taskList))
+    console.log(taskList);
+    location.reload();
   }
-  localStorage.setItem("tasks", JSON.stringify(taskList))
-  console.log(taskList);
-  location.reload();
+  else {
+    return;
+  }
+  
 }
 
 function toggleChecked(e) {
