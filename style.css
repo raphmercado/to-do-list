@@ -37,12 +37,22 @@ span:hover {
   background-color: yellow;
 }
 
-a {
-  background-color: green;
+a.edit {
+  background-color: darkgreen;
   color: white;
   margin-left: 10px;
 }
 
-a:hover {
-  background-color: blue;
+a.delete {
+  background-color: darkred;
+  color: white;
+  margin-left: 10px;
+}
+
+a.edit:hover {
+  background-color: green;
+}
+
+a.delete:hover {
+  background-color: red;
 }
