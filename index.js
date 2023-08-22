@@ -13,9 +13,7 @@ function enableDisableButton() {
   }
 }
 
-function addNewTask() {
-  console.log("Adding new task...");
-  taskList.push(newTaskInput.value);
+function createTaskComponent(value) {
   const task = document.createElement("li");
   const span = document.createElement("span");
   const edit = document.createElement("a");
@@ -23,21 +21,26 @@ function addNewTask() {
   span.setAttribute("id", "checkbox");
   edit.className = "edit";
   del.className = "delete";
-  span.textContent = newTaskInput.value;
+  span.textContent = value;
   edit.textContent = "Edit";
   del.textContent = "Delete";
   task.appendChild(span);
   task.appendChild(edit);
   task.appendChild(del);
   taskListContainer.appendChild(task);
+  task.addEventListener("click", toggleChecked);
+  edit.addEventListener("click", editTask);
+  del.addEventListener("click", deleteTask);
+}
+
+function addNewTask() {
+  console.log("Adding new task...");
+  taskList.push(newTaskInput.value);
+  createTaskComponent(newTaskInput.value);
   addNewTaskBtn.setAttribute("disabled", "");
   newTaskInput.value = "";
   console.log(taskList.length);
   localStorage.setItem("tasks", JSON.stringify(taskList));
-  task.addEventListener("click", toggleChecked);
-  edit.addEventListener("click", editTask);
-  del.addEventListener("click", deleteTask);
-  main();
 }
 
 function editTask(e) {
@@ -73,9 +76,16 @@ function deleteTask(e) {
   }
   else {
     return;
-  }
-  
+  }  
 }
+
+// function sortTask(e) {
+//   if (e.target.className === "checked") {
+//     const completedTasks = document.createElement("ul");
+//     completedTasks.setAttribute("id", "completedTasks");
+
+//   }
+// }
 
 function toggleChecked(e) {
   if (e.target.id !== "checkbox") {
@@ -104,23 +114,7 @@ function displayTaskList() {
     if (taskList.length === 0) {
       for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
         taskList.push(JSON.parse(localStorage.getItem("tasks"))[i]);
-        const task = document.createElement("li");
-        const span = document.createElement("span");
-        const edit = document.createElement("a");
-        const del = document.createElement("a");
-        span.setAttribute("id", "checkbox");
-        edit.className = "edit";
-        del.className = "delete";
-        span.textContent = JSON.parse(localStorage.getItem("tasks"))[i];
-        edit.textContent = "Edit";
-        del.textContent = "Delete";
-        task.appendChild(span);
-        task.appendChild(edit);
-        task.appendChild(del);
-        taskListContainer.appendChild(task);
-        task.addEventListener("click", toggleChecked);
-        edit.addEventListener("click", editTask);
-        del.addEventListener("click", deleteTask);
+        createTaskComponent(JSON.parse(localStorage.getItem("tasks"))[i]);
       }
       console.log(taskList);
     }
