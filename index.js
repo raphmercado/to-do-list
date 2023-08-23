@@ -3,6 +3,10 @@ const newTaskInput = document.getElementById("newTaskInput");
 const addNewTaskBtn = document.getElementById("addNewTaskBtn");
 const taskCount = document.createElement("para");
 const taskList = [];
+const completedTaskList = [];
+const completedTaskContainer = document.createElement("ul");
+completedTaskContainer.setAttribute("id", "completedTaskContainer");
+const mainContainer = document.querySelector("main");
 
 function enableDisableButton() {
   if (newTaskInput.value != "") {
@@ -41,6 +45,7 @@ function addNewTask() {
   newTaskInput.value = "";
   console.log(taskList.length);
   localStorage.setItem("tasks", JSON.stringify(taskList));
+  location.reload();
 }
 
 function editTask(e) {
@@ -85,6 +90,29 @@ function toggleChecked(e) {
   } 
   else {
     e.target.classList.toggle("checked");
+    //console.log(taskList.indexOf(e.target.textContent))
+    sortTask(e);
+  }
+}
+
+function sortTask(e) {
+  if (e.target.className === "checked") {
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(e.target.parentElement);
+    completedTaskContainer.appendChild(fragment);
+    mainContainer.appendChild(completedTaskContainer);
+    completedTaskList.push(e.target.textContent);
+    localStorage.setItem("completed tasks", JSON.stringify(completedTaskList));
+    taskList.splice(taskList.indexOf(e.target.textContent), 1);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    //location.reload();
+  }
+  else if (e.target.className === "") {
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(e.target.parentElement);
+    taskListContainer.appendChild(fragment);
+    //mainContainer.appendChild(completedTaskContainer);
+    // location.reload();
   }
 }
 
@@ -102,13 +130,39 @@ function countTasks() {
 
 function displayTaskList() {
   taskListContainer.appendChild(taskCount);
-  if (localStorage.length === 1) {
+  if (localStorage.getItem("tasks") !== null) {
     if (taskList.length === 0) {
       for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
         taskList.push(JSON.parse(localStorage.getItem("tasks"))[i]);
         createTaskComponent(JSON.parse(localStorage.getItem("tasks"))[i]);
       }
       console.log(taskList);
+    }
+  }
+  if (localStorage.getItem("completed tasks") !== null) {
+    if (completedTaskList.length === 0) {
+      for (let i = 0; i < JSON.parse(localStorage.getItem("completed tasks")).length; i++) {
+        completedTaskList.push(JSON.parse(localStorage.getItem("completed tasks"))[i]);
+        const task = document.createElement("li");
+        const span = document.createElement("span");
+        const edit = document.createElement("a");
+        const del = document.createElement("a");
+        span.setAttribute("id", "task");
+        span.className = "checked";
+        edit.className = "edit";
+        del.className = "delete";
+        span.textContent = JSON.parse(localStorage.getItem("completed tasks"))[i];
+        edit.textContent = "Edit";
+        del.textContent = "Delete";
+        task.appendChild(span);
+        task.appendChild(edit);
+        task.appendChild(del);
+        completedTaskContainer.appendChild(task);
+        mainContainer.appendChild(completedTaskContainer);
+        task.addEventListener("click", toggleChecked);
+        edit.addEventListener("click", editTask);
+        del.addEventListener("click", deleteTask);
+      }
     }
   }
 }        
