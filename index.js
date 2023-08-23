@@ -129,14 +129,18 @@ function sortTask(e) {
     localStorage.setItem("completed tasks", JSON.stringify(completedTaskList));
     taskList.splice(taskList.indexOf(e.target.textContent), 1);
     localStorage.setItem("tasks", JSON.stringify(taskList));
-    //location.reload();
+    location.reload();
   }
   else if (e.target.className === "") {
     const fragment = document.createDocumentFragment();
     fragment.appendChild(e.target.parentElement);
     taskListContainer.appendChild(fragment);
+    taskList.push(e.target.textContent);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    completedTaskList.splice(completedTaskList.indexOf(e.target.textContent), 1);
+    localStorage.setItem("completed tasks", JSON.stringify(completedTaskList));
     //mainContainer.appendChild(completedTaskContainer);
-    // location.reload();
+    location.reload();
   }
 }
 
