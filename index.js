@@ -6,6 +6,8 @@ const taskList = [];
 const completedTaskList = [];
 const completedTaskContainer = document.createElement("ul");
 completedTaskContainer.setAttribute("id", "completedTaskContainer");
+const completedTaskTitle = document.createElement("para");
+completedTaskTitle.textContent = "Completed Tasks";
 const mainContainer = document.querySelector("main");
 
 function enableDisableButton() {
@@ -169,6 +171,7 @@ function displayTaskList() {
   }
   if (localStorage.getItem("completed tasks") !== null) {
     if (completedTaskList.length === 0) {
+      completedTaskContainer.appendChild(completedTaskTitle);
       for (let i = 0; i < JSON.parse(localStorage.getItem("completed tasks")).length; i++) {
         completedTaskList.push(JSON.parse(localStorage.getItem("completed tasks"))[i]);
         const task = document.createElement("li");
