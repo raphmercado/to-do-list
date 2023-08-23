@@ -18,7 +18,7 @@ function createTaskComponent(value) {
   const span = document.createElement("span");
   const edit = document.createElement("a");
   const del = document.createElement("a");
-  span.setAttribute("id", "checkbox");
+  span.setAttribute("id", "task");
   edit.className = "edit";
   del.className = "delete";
   span.textContent = value;
@@ -79,16 +79,8 @@ function deleteTask(e) {
   }  
 }
 
-// function sortTask(e) {
-//   if (e.target.className === "checked") {
-//     const completedTasks = document.createElement("ul");
-//     completedTasks.setAttribute("id", "completedTasks");
-
-//   }
-// }
-
 function toggleChecked(e) {
-  if (e.target.id !== "checkbox") {
+  if (e.target.id !== "task") {
     return;
   } 
   else {
@@ -96,7 +88,7 @@ function toggleChecked(e) {
   }
 }
 
-function displayTaskCount() {
+function countTasks() {
   if (taskList.length === 0) {
     taskCount.textContent = "You have no task."
   } 
@@ -122,7 +114,7 @@ function displayTaskList() {
 }        
 
 function main() {
-  displayTaskCount();
+  countTasks();
   newTaskInput.addEventListener("keyup", enableDisableButton);
   addNewTaskBtn.addEventListener("click", addNewTask);
 }
