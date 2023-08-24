@@ -56,3 +56,12 @@ a.edit:hover {
 a.delete:hover {
   background-color: red;
 }
+
+
+#taskListContainer {
+  background-color: lightpink;
+}
+
+#completedTaskContainer {
+  background-color: lightgreen;
+}
