@@ -54,7 +54,8 @@ body {
 }
 
 #completedTaskContainer {
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
+  padding: 10px;
 }
 
 .taskInputContainer {
@@ -83,6 +84,10 @@ ul li {
   cursor: pointer;
   border-radius: 8px;
   background-color: #A3B18A;
+}
+
+#completedTaskContainer > li {
+  opacity: 0.6;
 }
 
 span::before {
