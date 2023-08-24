@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
   </head>
   <body>
-    <header>
-      <h1>Todo</h1>
-    </header>
-    <main>
-      <input type="text" id="newTaskInput" name="newTaskInput" placeholder="Add a task">
-      <button type="button" id="addNewTaskBtn" name="addNewTaskBtn" disabled>+</button>
-      <ul id="taskListContainer"></ul>
-    </main>
+    <div class="container">
+      <header>
+        <h1>Todo App</h1>
+      </header>
+      <main>
+        <div class="taskInputContainer">
+          <input type="text" id="newTaskInput" name="newTaskInput" placeholder="Add a task">
+          <button type="button" id="addNewTaskBtn" name="addNewTaskBtn" disabled>+</button>
+        </div>
+        <ul id="taskListContainer"></ul>
+      </main>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

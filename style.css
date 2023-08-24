@@ -1,14 +1,88 @@
 * {
   margin: 0;
   /* padding: 0; */
+  font-family: "Montserrat";
+  color: white;
   box-sizing: border-box;
+}
+
+body {
+  padding: 200px;
+}
+
+
+.container {
+  background-color: #588157;
+  padding: 30px;
+}
+
+::placeholder {
+  background-color: #344E41;
+  color: white;
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+#newTaskInput {
+  border-radius: 30px;
+  padding: 15px 50px 15px 17px;
+  background-color: #344E41;
+  border: 0;
+}
+
+#addNewTaskBtn {
+  border: 0;
+  opacity: 0.8;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  right: 44px;
+  top: 5px;
+  background-color: #DDA15E;
+  font-size: 25px;
+}
+
+#addNewTaskBtn:enabled {
+  border: 0;
+  opacity: 1;
+}
+
+#taskListContainer {
+  /* background-color: lightpink; */
+  padding: 10px;
+}
+
+#completedTaskContainer {
+  background-color: lightgreen;
+}
+
+.taskInputContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  left: 17px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+ul {
+  padding: 0;
 }
 
 ul li {
   list-style: none;
   position: relative;
-  padding: 10px 0px;
+  padding: 15px 0px 15px 43px;
+  margin: 10px 0;
   cursor: pointer;
+  border-radius: 8px;
+  background-color: #A3B18A;
 }
 
 span::before {
@@ -18,11 +92,11 @@ span::before {
   background-image: url(images/unchecked.png);
   background-size: cover;
   background-position: center;
-  border: 2px solid yelow;
+  /* border: 5px solid yellow; */
   height: 25px;
   width: 25px;
-  top: 6px;
-  left: -30px;
+  top: 11px;
+  left: 10px;
 }
 
 span.checked {
@@ -55,13 +129,4 @@ a.edit:hover {
 
 a.delete:hover {
   background-color: red;
-}
-
-
-#taskListContainer {
-  background-color: lightpink;
-}
-
-#completedTaskContainer {
-  background-color: lightgreen;
 }
