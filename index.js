@@ -22,17 +22,19 @@ function enableDisableButton() {
 function createTaskComponent(value) {
   const task = document.createElement("li");
   const span = document.createElement("span");
-  const edit = document.createElement("a");
-  const del = document.createElement("a");
+  const actions = document.createElement("span");
+  const edit = document.createElement("i");
+  const del = document.createElement("i");
   span.setAttribute("id", "task");
-  edit.className = "edit";
-  del.className = "delete";
+  span.className = "unchecked";
+  actions.className = "actions";
   span.textContent = value;
-  edit.textContent = "Edit";
-  del.textContent = "Delete";
+  edit.className = "uil uil-edit";
+  del.className = "uil uil-trash";
   task.appendChild(span);
-  task.appendChild(edit);
-  task.appendChild(del);
+  actions.appendChild(edit);
+  actions.appendChild(del);
+  task.appendChild(actions);
   taskListContainer.appendChild(task);
   task.addEventListener("click", toggleChecked);
   edit.addEventListener("click", editTask);
@@ -52,23 +54,23 @@ function addNewTask() {
 
 function editTask(e) {
   console.log("Editing task...");
-  console.log(e.target.parentElement.firstChild.textContent);
-  console.log(e.target.parentElement.firstChild.className)
+  console.log(e.target.parentElement.parentElement.firstChild.textContent);
+  console.log(e.target.className);
   const input = prompt("Edit task");
   if (input === null) {
     return;
   }
   else if (input !== null) {
-    if (e.target.parentElement.firstChild.className === "") {
-      const oldTask = taskList.indexOf(e.target.parentElement.firstChild.textContent);
+    if (e.target.parentElement.parentElement.firstChild.className === "unchecked") {
+      const oldTask = taskList.indexOf(e.target.parentElement.parentElement.firstChild.textContent);
       taskList.splice(oldTask, 1, input);
       localStorage.setItem("tasks", JSON.stringify(taskList));
       console.log(taskList);
       location.reload();
     }
-    else if (e.target.parentElement.firstChild.className === "checked") {
+    else if (e.target.parentElement.parentElement.firstChild.className === "checked") {
       console.log("checked");
-      const oldTask = completedTaskList.indexOf(e.target.parentElement.firstChild.textContent);
+      const oldTask = completedTaskList.indexOf(e.target.parentElement.parentElement.firstChild.textContent);
       completedTaskList.splice(oldTask, 1, input);
       localStorage.setItem("completed tasks", JSON.stringify(completedTaskList));
       console.log(completedTaskList);
@@ -81,10 +83,10 @@ function deleteTask(e) {
   const response = confirm("Are you sure you want to delete this task?");
   if (response === true) {
     console.log("Deleting task...");
-    console.log(e.target.parentElement.firstChild.textContent);
-    if (e.target.parentElement.firstChild.className === "") {
+    console.log(e.target.parentElement.parentElement.firstChild.textContent);
+    if (e.target.parentElement.parentElement.firstChild.className === "unchecked") {
       for (let i = 0; i < JSON.parse(localStorage.getItem("tasks")).length; i++) {
-        if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
+        if (e.target.parentElement.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("tasks"))[i]) {
           taskList.splice(i, 1);
           console.log("Task Deleted.");
         }
@@ -93,9 +95,9 @@ function deleteTask(e) {
       console.log(taskList);
       location.reload();
     }
-    else if (e.target.parentElement.firstChild.className === "checked") {
+    else if (e.target.parentElement.parentElement.firstChild.className === "checked") {
       for (let i = 0; i < JSON.parse(localStorage.getItem("completed tasks")).length; i++) {
-        if (e.target.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("completed tasks"))[i]) {
+        if (e.target.parentElement.parentElement.firstChild.textContent === JSON.parse(localStorage.getItem("completed tasks"))[i]) {
           completedTaskList.splice(i, 1);
           console.log("Task Deleted.");
         }
@@ -114,8 +116,12 @@ function toggleChecked(e) {
   if (e.target.id !== "task") {
     return;
   } 
-  else {
-    e.target.classList.toggle("checked");
+  else if (e.target.id === "task" && e.target.className === "checked") {
+    e.target.className = "unchecked";
+    sortTask(e);
+  }
+  else if (e.target.id === "task" && e.target.className === "unchecked") {
+    e.target.className = "checked";
     //console.log(taskList.indexOf(e.target.textContent))
     sortTask(e);
   }
@@ -133,7 +139,7 @@ function sortTask(e) {
     localStorage.setItem("tasks", JSON.stringify(taskList));
     location.reload();
   }
-  else if (e.target.className === "") {
+  else if (e.target.className === "unchecked") {
     const fragment = document.createDocumentFragment();
     fragment.appendChild(e.target.parentElement);
     taskListContainer.appendChild(fragment);
@@ -176,18 +182,19 @@ function displayTaskList() {
         completedTaskList.push(JSON.parse(localStorage.getItem("completed tasks"))[i]);
         const task = document.createElement("li");
         const span = document.createElement("span");
-        const edit = document.createElement("a");
-        const del = document.createElement("a");
+        const actions = document.createElement("span");
+        const edit = document.createElement("i");
+        const del = document.createElement("i");
         span.setAttribute("id", "task");
+        actions.className = "actions";
         span.className = "checked";
-        edit.className = "edit";
-        del.className = "delete";
         span.textContent = JSON.parse(localStorage.getItem("completed tasks"))[i];
-        edit.textContent = "Edit";
-        del.textContent = "Delete";
+        edit.className = "uil uil-edit";
+        del.className = "uil uil-trash";
         task.appendChild(span);
-        task.appendChild(edit);
-        task.appendChild(del);
+        actions.appendChild(edit);
+        actions.appendChild(del);
+        task.appendChild(actions);
         completedTaskContainer.appendChild(task);
         mainContainer.appendChild(completedTaskContainer);
         task.addEventListener("click", toggleChecked);
