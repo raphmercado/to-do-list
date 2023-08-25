@@ -10,10 +10,10 @@ body {
   padding: 200px;
 }
 
-
 .container {
   background-color: #588157;
   padding: 30px;
+  border-radius: 20px;
 }
 
 ::placeholder {
@@ -81,26 +81,32 @@ ul li {
   position: relative;
   padding: 15px 0px 15px 43px;
   margin: 10px 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   border-radius: 8px;
   background-color: #A3B18A;
+  display: flex;
 }
 
 #completedTaskContainer > li {
   opacity: 0.6;
 }
 
-span::before {
+span#task {
+  flex: 8;
+  align-self: center;
+}
+
+span.unchecked::before {
   content: '';
   position: absolute;
   border-radius: 50%;
   background-image: url(images/unchecked.png);
   background-size: cover;
   background-position: center;
-  /* border: 5px solid yellow; */
+  cursor: pointer;
   height: 25px;
   width: 25px;
-  top: 11px;
+  top: 15px;
   left: 10px;
 }
 
@@ -109,29 +115,38 @@ span.checked {
 }
 
 span.checked::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
   background-image: url(images/checked.png);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  top: 15px;
+  left: 10px;
+  /* top: 12px; */
 }
 
-span:hover {
+span#task:hover {
   background-color: yellow;
+  cursor: pointer;
 }
 
-a.edit {
+.actions {
+  flex: 1;
+}
+
+.uil {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.uil-edit:hover {
   background-color: darkgreen;
-  color: white;
-  margin-left: 10px;
 }
 
-a.delete {
+.uil-trash:hover {
   background-color: darkred;
-  color: white;
-  margin-left: 10px;
-}
-
-a.edit:hover {
-  background-color: green;
-}
-
-a.delete:hover {
-  background-color: red;
 }
