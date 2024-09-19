@@ -139,7 +139,7 @@ span#task:hover {
 }
 
 .actions {
-  flex: 1;
+  padding-right: 10px;
 }
 
 .uil {
