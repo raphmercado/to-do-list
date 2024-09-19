@@ -30,13 +30,14 @@ body {
   left: 17px;
 }
 
+.taskInputContainer #newTaskInput {
   border-radius: 30px;
   padding: 15px 50px 15px 17px;
   background-color: #344E41;
   border: 0;
 }
 
-#addNewTaskBtn {
+.taskInputContainer #addNewTaskBtn {
   border: 0;
   opacity: 0.8;
   border-radius: 30px;
